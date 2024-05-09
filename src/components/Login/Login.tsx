@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Modal, Fade } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-function Login() {
+const Login = (props: { setName: (name: string) => void }) => {
+    
     const [open, setOpen] = useState(false);
+    const [redirect, setRedirect] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Crie uma instância de navigate
 
     const handleOpen = () => {
         setOpen(true);
@@ -25,15 +26,21 @@ function Login() {
                 },
                 body: JSON.stringify({ email, password }),
             });
+
             const data = await response.json();
+            localStorage.setItem('token', data.token); 
             
-            localStorage.setItem('token', data.token); // Armazena o token no localStorage
+            //redirect 
+            setRedirect(true);
             
-            navigate('/admin'); // Redireciona para o AdminPanel
         } catch (error) {
             console.error('Erro ao fazer login:', error);
         }
     };
+
+    if(redirect){
+        return <Redirect to="/"/>
+    }
     
 
     return (
@@ -57,6 +64,7 @@ function Login() {
                 <Fade in={open}>
                     <div style={{ backgroundColor: '#f0f0f0', padding: '20px', borderRadius: '10px', width: '300px', margin: 'auto', marginTop: '100px' }}>
                         <h2>Cadastrar</h2>
+                        {/***Precisa fazer o cadastro depois */}
                         <TextField label="Nome" variant="outlined" style={{ marginBottom: '10px', width: '100%' }} />
                         <TextField label="Empresa" variant="outlined" style={{ marginBottom: '10px', width: '100%' }} />
                         <TextField label="Email" variant="outlined" style={{ marginBottom: '10px', width: '100%' }} />

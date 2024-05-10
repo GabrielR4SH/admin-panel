@@ -27,7 +27,8 @@ const Login = () => {
             {token ? (
                 <AdminPanel isAuthenticated={true} username={username} />
             ) : (
-                <Container maxWidth="sm">
+                <Container maxWidth="md">
+                <h1 style={{textAlign:'center'}}>Gerenciador Administrativo</h1>
                     <div style={{ padding: '5px' }}>
                         <div style={{ backgroundImage: `url('https://www.andersonfotografo.com/wp-content/uploads/2023/03/construcao-civil-predios-imobiliarios-drone.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '25px', padding: '5px',opacity:'0.9' }}>
                             <div style={{ marginTop: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '20px', borderRadius: '10px', marginBottom:'10%' }}>
